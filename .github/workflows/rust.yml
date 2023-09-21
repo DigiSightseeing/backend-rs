@@ -1,6 +1,6 @@
 name: Rust
 
-on: [push, pull_request]git remote add origin git@github.com:DigiSightseeing/backend-rs.git
+on: [push, pull_request]
 
 env:
   CARGO_TERM_COLOR: always
