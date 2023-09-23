@@ -258,7 +258,9 @@ name = "api-actix"
 version = "0.1.0"
 dependencies = [
  "actix-web",
+ "api-db",
  "api-lib",
+ "color-eyre",
  "dotenv",
  "sqlx",
  "tracing",

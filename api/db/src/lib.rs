@@ -1,5 +1,5 @@
 use color_eyre::Result;
-use sqlx::{postgres::PgPoolOptions, Pool, Postgres};
+use sqlx::{migrate, postgres::PgPoolOptions, Pool, Postgres};
 
 pub async fn pool() -> Result<Pool<Postgres>> {
     let url = std::env::var("DATABASE_URL")?;
@@ -7,3 +7,7 @@ pub async fn pool() -> Result<Pool<Postgres>> {
     Ok(pool)
 }
 
+pub async fn migrate(pool: Pool<Postgres>) -> Result<()> {
+    migrate!("./migrations").run(&pool).await?;
+    Ok(())
+}
