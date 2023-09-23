@@ -1,0 +1,12 @@
+[package]
+name = "shared"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+backend = ["sqlx"]
+
+[dependencies]
+serde = { workspace = true }
+sqlx = { workspace = true, optional = true }
+uuid = { workspace = true }
