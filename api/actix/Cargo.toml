@@ -1,0 +1,25 @@
+[package]
+name = "api-actix"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+
+[dependencies]
+api-lib = { workspace = true }
+sqlx = { workspace = true }
+actix-web = { workspace = true }
+dotenv = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { version = "0.3", features = [
+  "env-filter",
+  "json",
+  "time",
+] }
+
+
+[package.metadata.scripts]
+db_create = "bash ./scripts/create_db"
+db_start = "sudo docker start DigiTour"
+db_stop = "sudo docker stop DigiTour"
+db_remove = "sudo docker rm DigiTour"
