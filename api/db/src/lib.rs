@@ -1,14 +1,9 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
+use color_eyre::Result;
+use sqlx::{postgres::PgPoolOptions, Pool, Postgres};
+
+pub async fn pool() -> Result<Pool<Postgres>> {
+    let url = std::env::var("DATABASE_URL")?;
+    let pool = PgPoolOptions::new().connect(url.as_str()).await?;
+    Ok(pool)
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
-}

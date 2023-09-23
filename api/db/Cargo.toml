@@ -9,3 +9,4 @@ sqlx = { workspace = true }
 actix-web = { workspace = true }
 dotenv = { workspace = true }
 tracing = { workspace = true }
+color-eyre = { workspace = true }
