@@ -1,0 +1,9 @@
+#!/bin/bash
+
+sudo docker run --name DigiTour \
+    -p 5432:5432 \
+    -e POSTGRES_USER=user \
+    -e POSTGRES_PASSWORD=password \
+    -e POSTGRES_DB=DigiTourLocal \
+    -v "$PWD"/scripts/init.sql:/docker-entrypoint-initdb.d/init.sql \
+    -d postgres:latest

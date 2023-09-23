@@ -1,5 +1,5 @@
 [package]
-name = "digitour-rs"
+name = "digitour"
 version = "0.0.1"
 edition = "2021"
 authors = ["Kristofers Solo <dev@Kristofers.xyz>"]
@@ -14,6 +14,7 @@ serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 chrono = { version = "0.4", features = ["serde"] }
 color-eyre = "0.6"
+dotenv = "0.15"
 sqlx = { version = "0.7", features = [
   "runtime-tokio",
   "postgres",
@@ -23,3 +24,9 @@ sqlx = { version = "0.7", features = [
   "uuid",
   "migrate",
 ] }
+
+[package.metadata.scripts]
+db_create = "bash ./scripts/create_db"
+db_start = "sudo docker start DigiTour"
+db_stop = "sudo docker stop DigiTour"
+db_remove = "sudo docker rm DigiTour"
