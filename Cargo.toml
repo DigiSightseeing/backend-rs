@@ -1,13 +1,24 @@
-[package]
-name = "digitour-rs"
-version = "0.0.1"
-edition = "2021"
+[workspace]
+resolver = "2"
+members = ["api/lib", "api/actix", "api/models", "shared"]
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
-[dependencies]
+[workspace.dependencies]
+shared = { path = "./shared" }
+api-lib = { path = "./api/lib" }
+api-models = { path = "./api/models" }
 actix-web = "4.4"
+sqlx = { version = "0.7", features = [
+  "runtime-tokio",
+  "postgres",
+  "macros",
+  "chrono",
+  "json",
+  "uuid",
+  "migrate",
+] }
 serde = { version = "1", features = ["derive"] }
+uuid = { version = "1.4", features = ["serde", "v4"] }
 chrono = { version = "0.4", features = ["serde"] }
-uuid = { version = "1.4", features = ["v4"] }
 color-eyre = "0.6"
+tracing = "0.1"
+dotenv = "0.15"
