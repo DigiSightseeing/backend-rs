@@ -1,14 +1,20 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
+use std::sync::Arc;
+
+pub fn database_url() -> Arc<str> {
+    std::env::var("DATABASE_URL")
+        .expect("DATABASE_URL must be set.")
+        .into()
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+pub fn hash_secret() -> Arc<str> {
+    std::env::var("HASH_SECRET")
+        .expect("HASH_SECRET must be set!")
+        .into()
+}
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
+pub fn jwt_secret() -> Arc<[u8]> {
+    std::env::var("JWT_SECRET")
+        .expect("JWT_SECRET must be set!")
+        .as_bytes()
+        .into()
 }
