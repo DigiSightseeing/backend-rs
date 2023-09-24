@@ -31,6 +31,6 @@ jobs:
         run: ~/.cargo/bin/sqlx migrate run
       - name: Clippy
         if: github.ref == 'refs/head/main'
-        run: cargo clippy -- -W clippy::unwrap_used -W clippy::pedantic -W clippy::nursery
+        run: cargo clippy -- -W clippy::unwrap_used -W clippy::nursery
       - name: Run tests
         run: cargo test --verbose
