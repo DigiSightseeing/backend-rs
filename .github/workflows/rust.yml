@@ -25,8 +25,6 @@ jobs:
           path: ~/.cargo/bin/sqlx
           key: ${{ runner.os }}-sqlx-cli-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: ${{ runner.os }}-sqlx-cli-
-      - name: Install SQLx CLI
-        run: cargo install sqlx-cli -q
       - name: Run migrations
         run: ~/.cargo/bin/sqlx migrate run
       - name: Clippy
