@@ -9,7 +9,7 @@ pub struct AppState {
 }
 
 impl AppState {
-    pub fn new(db: Pool<Postgres>) -> Self {
+    pub const fn new(db: Pool<Postgres>) -> Self {
         Self { pool: db }
     }
 }
@@ -26,7 +26,7 @@ pub struct TokenClaims {
 }
 
 impl TokenClaims {
-    pub fn new(id: Uuid) -> Self {
+    pub const fn new(id: Uuid) -> Self {
         Self { id }
     }
 }
