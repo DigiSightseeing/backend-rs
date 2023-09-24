@@ -1,16 +1,13 @@
 [package]
-name = "api-actix"
+name = "api-models"
 version = "0.1.0"
 edition = "2021"
 publish = false
 
 [dependencies]
 api-lib = { workspace = true }
-api-models = { workspace = true }
 shared = { workspace = true }
 sqlx = { workspace = true }
-actix-web = { workspace = true }
-dotenv = { workspace = true }
 tracing = { workspace = true }
 tracing-subscriber = { version = "0.3", features = [
   "env-filter",
@@ -20,9 +17,3 @@ tracing-subscriber = { version = "0.3", features = [
 color-eyre = { workspace = true }
 chrono = { workspace = true }
 serde = { workspace = true }
-
-actix-web-httpauth = "0.8"
-argonautica = "0.2"
-hmac = "0.12"
-jwt = "0.16"
-sha2 = "0.10"
