@@ -1,11 +1,11 @@
 [workspace]
 resolver = "2"
-members = ["api/lib", "api/actix", "api/db", "shared"]
+members = ["api/lib", "api/actix", "api/models", "shared"]
 
 [workspace.dependencies]
 shared = { path = "./shared" }
 api-lib = { path = "./api/lib" }
-api-db = { path = "./api/db" }
+api-models = { path = "./api/models" }
 actix-web = "4.4"
 sqlx = { version = "0.7", features = [
   "runtime-tokio",
