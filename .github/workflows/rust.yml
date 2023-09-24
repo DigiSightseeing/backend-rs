@@ -1,18 +1,23 @@
 name: Rust
-
 on: [push, pull_request]
-
 env:
   CARGO_TERM_COLOR: always
-
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
-    - name: Build
-      run: cargo build --verbose
-    - name: Run tests
-      run: cargo test --verbose
+      - uses: actions/checkout@v4
+      - name: Setup Docker
+        run: docker/setup-buildx-action@v3
+      - name: Build and run Docker Compose
+      - run: docker-compose up -d
+      - name: Migrate
+        run: |
+          cargo install sqlx-cli
+          cargo sqlx migrate run
+      - run: mv .env.example .env
+      - name: Clippy
+        if: github.ref == 'refs/head/main'
+        run: cargo clippy -- -W clippy::unwrap_used -W clippy::pedantic -W clippy::nursery
+      - name: Run tests
+        run: cargo test --verbose
