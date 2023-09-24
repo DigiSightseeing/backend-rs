@@ -19,12 +19,8 @@ jobs:
       - name: Build and run Docker Compose
         run: docker-compose up -d
       - run: mv .env.example .env
-      - name: Cache SQLx CLI
-        uses: actions/cache@v3
-        with:
-          path: ~/.cargo/bin/sqlx
-          key: ${{ runner.os }}-sqlx-cli-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: ${{ runner.os }}-sqlx-cli-
+      - name: Install SQLx CLI
+        run: cargo install sqlx-cli
       - name: Run migrations
         run: ~/.cargo/bin/sqlx migrate run
       - name: Clippy
