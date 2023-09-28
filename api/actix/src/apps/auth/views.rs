@@ -38,7 +38,9 @@ pub async fn register(state: Data<AppState>, body: Json<NewUser>) -> impl Respon
     .await;
 
     match query {
-        Ok(user) => HttpResponse::Ok().json(format!("{}", user.id)),
+        Ok(user) => HttpResponse::SeeOther()
+            .append_header(("location", format!("/user/{}", user.id)))
+            .finish(),
         Err(e) => HttpResponse::InternalServerError().json(format!("{:?}", e)),
     }
 }
