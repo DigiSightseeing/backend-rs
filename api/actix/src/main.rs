@@ -2,7 +2,7 @@ mod apps;
 mod prelude;
 
 use actix_web::{web::Data, App, HttpServer};
-use apps::auth;
+use apps::{auth, user};
 use prelude::{pool, AppState};
 use std::env;
 
@@ -22,6 +22,7 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(move || {
         App::new()
             .app_data(Data::new(AppState::new(pool.to_owned())))
+            .service(user::url())
             .service(auth::url())
     })
     .bind(("127.0.0.1", 8080))?
