@@ -2,7 +2,6 @@ use color_eyre::Result;
 use serde::{Deserialize, Serialize};
 use sqlx::{postgres::PgPoolOptions, types::Uuid, Pool, Postgres};
 
-pub mod user;
 
 pub struct AppState {
     pub pool: Pool<Postgres>,

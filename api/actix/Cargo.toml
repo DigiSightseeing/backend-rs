@@ -6,7 +6,6 @@ publish = false
 
 [dependencies]
 api-lib = { workspace = true }
-api-models = { workspace = true }
 shared = { workspace = true }
 sqlx = { workspace = true }
 actix-web = { workspace = true }
@@ -26,3 +25,4 @@ argonautica = "0.2"
 hmac = "0.12"
 jwt = "0.16"
 sha2 = "0.10"
+validator = { version = "0.16", features = ["derive"] }
