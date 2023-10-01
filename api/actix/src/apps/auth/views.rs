@@ -38,9 +38,13 @@ pub async fn register(state: Data<AppState>, body: Json<NewUser>) -> impl Respon
     .await;
 
     match query {
-        Ok(user) => HttpResponse::SeeOther()
-            .append_header(("location", format!("/user/{}", user.id)))
-            .finish(),
+        Ok(user) => {
+            let jwt_secret: Hmac<Sha512> =
+                Hmac::new_from_slice(shared::jwt_secret().deref()).unwrap();
+            let claims = TokenClaims::new(user.id);
+            let token_str = claims.sign_with_key(&jwt_secret).unwrap();
+            HttpResponse::Ok().json(token_str)
+        }
         Err(e) => HttpResponse::InternalServerError().json(format!("{:?}", e)),
     }
 }
@@ -84,9 +88,11 @@ pub async fn login(state: Data<AppState>, credentials: BasicAuth) -> impl Respon
                         )
                         .fetch_one(&state.pool)
                         .await
+                        // TODO: remove match statement
                         {
                             Ok(_) | Err(_) => {}
                         }
+
                         let claims = TokenClaims::new(user.id);
                         let token_str = claims.sign_with_key(&jwt_secret).unwrap();
                         HttpResponse::Ok().json(token_str)
